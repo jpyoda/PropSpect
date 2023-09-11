@@ -5,8 +5,8 @@ const DefaultFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      <footer className="bg-white rounded-lg shadow m-4">
+    <section className="bg-slate-50 p-4">
+      <footer className="bg-white rounded-lg shadow">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center">
             © {currentYear}{" "}
@@ -31,7 +31,7 @@ const DefaultFooter = () => {
           </ul>
         </div>
       </footer>
-    </>
+    </section>
   );
 };
 

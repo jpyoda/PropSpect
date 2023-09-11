@@ -4,7 +4,7 @@ import React from "react";
 const DefaultHeader = () => {
   return (
     <>
-      <nav className="bg-white border-gray-200 shadow">
+      <nav className="bg-white border-gray-200 drop-shadow">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="https://flowbite.com/" className="flex items-center">
             <span className="self-center text-2xl font-semibold text-gray-900">
