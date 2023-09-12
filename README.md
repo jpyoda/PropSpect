@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PropSpect
 
-## Getting Started
+### The AI Revolution for Brokers
 
-First, run the development server:
+Experience instant, AI-powered property discovery tailored for brokers. Discover prime properties in seconds without the need for endless filtering.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **AI-powered Discovery**: Utilizes state-of-the-art language models for instant property suggestions.
+- **No More Filters**: Move beyond the traditional search filters to a more intuitive property search.
+- **Data Integration**: Integrates with open-source data from "Datos libres" from Colombia, ensuring broad coverage and valuable insights.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## Setting Up:
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Node.js**: Ensure you have Node.js installed. If not, download and install it from [Node.js official website](https://nodejs.org/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Installation:
 
-## Deploy on Vercel
+1. **Clone the Repository**:
+   git clone [https://github.com/jpyoda/PropSpect]
+   cd PropSpect
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install Dependencies**:
+   npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Run the Application**:
+   npm run dev
+
+yaml
+
+---
+
+## Usage:
+
+1. **Start the Application**:
+   Navigate to `http://localhost:3000` in your browser.
+
+2. **Input OpenAI API Key**:
+   You will be prompted to input your OpenAI API key upon initial use. Ensure you input it correctly to avail the AI-powered property suggestions.
+
+3. **Property Discovery**:
+   Enter relevant property criteria and experience the AI-powered suggestions.
+
+---
+
+## Limitations & Recommendations:
+
+While the LLM model from OpenAI offers significant capabilities, there are some limitations:
+
+1. **Rate and Quota Restrictions**: The API has request rate and quota limits. It is recommended to monitor your usage to avoid unexpected costs.
+
+2. **Open Source Libraries**: For enhanced performance and flexibility, consider integrating with other open-source libraries that work well with LLM models or create your own implementation for retrieving information.
+
+---
+
+## Contribution & Support:
+
+Contributions are welcome! If you'd like to contribute or have any issues, please raise an issue on the GitHub repository or contact the maintainers directly.
+
+---
+
+## License:
+
+This project integrates with open-source data from "Datos libres" from Colombia. Ensure you adhere to the licensing terms of the data source when deploying or distributing this application.
+
+---
+
+**Happy Property Hunting!**
