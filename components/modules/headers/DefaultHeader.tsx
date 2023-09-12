@@ -1,7 +1,10 @@
-import Image from "next/image";
 import React from "react";
 
-const DefaultHeader = () => {
+type Props = {
+  setApiKey?: any;
+  apiKey?: any;
+};
+const DefaultHeader = ({ setApiKey, apiKey }: Props) => {
   return (
     <>
       <nav className="bg-white border-gray-200 drop-shadow">
@@ -14,21 +17,15 @@ const DefaultHeader = () => {
           <div className="block w-auto" id="navbar-default">
             <ul className="font-medium flex rounded-lg bg-gray-50 flex-row space-x-8 bg-white">
               <li>
-                <a
-                  href="#"
-                  className="block rounded bg-transparent text-blue-700 py-2 pl-4 pr-4"
-                  aria-current="page"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 rounded hover:bg-transparent border-0 hover:text-blue-700"
-                >
-                  Contact
-                </a>
+                <input
+                  type="password"
+                  value={apiKey}
+                  onChange={(e) =>
+                    setApiKey(e.target.value ? e.target.value : "")
+                  }
+                  placeholder="OpenAI API key"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                />
               </li>
             </ul>
           </div>
@@ -39,3 +36,13 @@ const DefaultHeader = () => {
 };
 
 export default DefaultHeader;
+
+/*
+<a
+                  href="#"
+                  className="block rounded bg-transparent text-blue-700 py-2 pl-4 pr-4"
+                  aria-current="page"
+                >
+                  Home
+                </a>
+*/

@@ -3,11 +3,13 @@ import React from "react";
 
 type Props = {
   searchTerm: string;
+  apikeyAlert: boolean;
   handleInputChange: any;
   handleSearch: any;
 };
 const HeroSection = ({
   searchTerm,
+  apikeyAlert,
   handleInputChange,
   handleSearch,
 }: Props) => {
@@ -25,6 +27,14 @@ const HeroSection = ({
         <p className="mb-12 text-lg font-normal text-gray-500 lg:text-xl px-12">
           {`Ditch the Filters. Delve Directly into Prime Properties. Experience instant, AI-powered property discovery without the hassle.`}
         </p>
+        {apikeyAlert ? (
+          <div
+            className="p-4 mb-4 text-left text-sm text-yellow-800 rounded-lg bg-yellow-50"
+            role="alert"
+          >
+            <span className="font-medium">{`Please enter your OpenAI API key`}</span>
+          </div>
+        ) : null}
         <PropertySearch
           searchTerm={searchTerm}
           handleInputChange={handleInputChange}
