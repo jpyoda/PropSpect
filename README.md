@@ -2,73 +2,89 @@
 
 ### The AI Revolution for Brokers
 
-Experience instant, AI-powered property discovery tailored for brokers. Discover prime properties in seconds without the need for endless filtering.
+Describe the property you are looking for in plain language, for example
+*"apartamentos en Bogotá estrato seis"*, and PropSpect searches Colombia's open
+property data for matching listings. No filter forms needed.
 
 ---
 
-## Features:
+## Features
 
-- **AI-powered Discovery**: Utilizes state-of-the-art language models for instant property suggestions.
-- **No More Filters**: Move beyond the traditional search filters to a more intuitive property search.
-- **Data Integration**: Integrates with open-source data from "Datos libres" from Colombia, ensuring broad coverage and valuable insights.
+- **Plain-language search**: an OpenAI model turns your query into structured filters.
+- **Open data**: results come from the *Datos Abiertos Colombia* dataset of properties for sale
+  ([`72gd-px77`](https://www.datos.gov.co/resource/72gd-px77.json)).
+- **Bring your own key**: you paste your own OpenAI API key; it is sent only to OpenAI.
 
----
+## How it works
 
-## Setting Up:
+1. You type a query and press **Search**.
+2. Your browser makes one OpenAI call (Responses API with structured output) that
+   extracts filters: `ciudad`, `departamento`, `barrio`, `estrato`, `tipo_de_inmueble`
+   (`lib/search.ts`).
+3. PropSpect builds a query against the fixed datos.gov.co endpoint from those
+   fields only, with a result limit (`lib/datosGov.ts`). The model never chooses
+   which URL is fetched.
+4. The rows are validated with zod and shown as cards.
 
-### Prerequisites:
+### About your API key
 
-1. **Node.js**: Ensure you have Node.js installed. If not, download and install it from [Node.js official website](https://nodejs.org/).
+PropSpect is a public, static app with no backend. Your key stays in your
+browser's memory and goes directly to `api.openai.com`; it never passes through
+a PropSpect server. Tick **Remember for this tab** to keep it in
+`sessionStorage` until the tab closes. We recommend
+[setting a spending limit](https://platform.openai.com/settings/organization/limits)
+on your OpenAI account.
 
-### Installation:
-
-1. **Clone the Repository**:
-   git clone [https://github.com/jpyoda/PropSpect]
-   cd PropSpect
-
-2. **Install Dependencies**:
-   npm install
-
-3. **Run the Application**:
-   npm run dev
-
-yaml
-
----
-
-## Usage:
-
-1. **Start the Application**:
-   Navigate to `http://localhost:3000` in your browser.
-
-2. **Input OpenAI API Key**:
-   You will be prompted to input your OpenAI API key upon initial use. Ensure you input it correctly to avail the AI-powered property suggestions.
-
-3. **Property Discovery**:
-   Enter relevant property criteria and experience the AI-powered suggestions.
+The model is set by `DEFAULT_MODEL` in `lib/search.ts`.
 
 ---
 
-## Limitations & Recommendations:
+## Getting started
 
-While the LLM model from OpenAI offers significant capabilities, there are some limitations:
+Requires **Node.js 20.9+** (see `.nvmrc`).
 
-1. **Rate and Quota Restrictions**: The API has request rate and quota limits. It is recommended to monitor your usage to avoid unexpected costs.
+```bash
+git clone https://github.com/jpyoda/PropSpect
+cd PropSpect
+npm install
+npm run dev
+```
 
-2. **Open Source Libraries**: For enhanced performance and flexibility, consider integrating with other open-source libraries that work well with LLM models or create your own implementation for retrieving information.
+Open http://localhost:3000, paste your OpenAI API key at the top of the page,
+and try one of the sample queries.
+
+### Scripts
+
+| Command             | What it does                       |
+| ------------------- | ---------------------------------- |
+| `npm run dev`       | Start the dev server               |
+| `npm run build`     | Production build                   |
+| `npm start`         | Serve the production build         |
+| `npm run lint`      | ESLint                             |
+| `npm run typecheck` | TypeScript, no emit                |
+| `npm test`          | Unit tests (Vitest)                |
+
+### Stack
+
+Next.js 16 (App Router), React 19, Tailwind CSS 4, TypeScript, the `openai`
+SDK and zod 4.
 
 ---
 
-## Contribution & Support:
+## Limitations
 
-Contributions are welcome! If you'd like to contribute or have any issues, please raise an issue on the GitHub repository or contact the maintainers directly.
+- **OpenAI rate limits and cost**: searches use your key's quota.
+- **Exact matching**: filters are sent as exact, uppercase matches against the
+  dataset, so spelling has to match the source data (for example `BOGOTA`).
+  Estrato is sent as a word (`SEIS`), as the dataset stores it.
+- **Data coverage**: results are limited to what the public dataset contains.
 
----
+## Contributing
 
-## License:
+Contributions are welcome. Open an issue or pull request on GitHub. CI runs
+lint, typecheck, tests and a production build on every pull request.
 
-This project integrates with open-source data from "Datos libres" from Colombia. Ensure you adhere to the licensing terms of the data source when deploying or distributing this application.
+## License
 
----
-
-**Happy Property Hunting!**
+MIT, see [LICENSE](LICENSE). Property data comes from Datos Abiertos Colombia;
+follow its terms of use when deploying or redistributing this app.

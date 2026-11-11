@@ -1,9 +1,12 @@
 import { z } from "zod";
-import { InmuebleSchema, type Inmueble, type SearchFilters } from "./inmueble";
+import { InmuebleSchema, SearchFiltersSchema, type Inmueble, type SearchFilters } from "./inmueble";
 
 /** "Datos libres" Colombia: properties available for sale. */
 export const DATASET_URL = "https://www.datos.gov.co/resource/72gd-px77.json";
 export const RESULT_LIMIT = 20;
+
+/** The only dataset columns a search may filter on. */
+const FILTER_FIELDS = SearchFiltersSchema.keyof().options;
 
 const ESTRATO_WORDS: Record<string, string> = {
   "1": "UNO",
@@ -30,7 +33,8 @@ export function normalizeEstrato(value: string): string {
  */
 export function buildQueryUrl(filters: SearchFilters): string {
   const params = new URLSearchParams();
-  for (const [key, raw] of Object.entries(filters)) {
+  for (const key of FILTER_FIELDS) {
+    const raw = filters[key];
     if (typeof raw !== "string" || raw.trim() === "") continue;
     params.set(key, key === "estrato" ? normalizeEstrato(raw) : normalize(raw));
   }
