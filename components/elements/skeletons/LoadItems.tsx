@@ -3,7 +3,7 @@ import React from "react";
 const LoadItems = () => {
   return (
     <section>
-      <div className="py-8 px-4 mx-auto max-w-screen-md">
+      <div className="py-8 px-4 mx-auto max-w-(--breakpoint-md)">
         <div role="status">
           <svg
             aria-hidden="true"

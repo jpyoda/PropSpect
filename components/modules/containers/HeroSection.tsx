@@ -15,7 +15,7 @@ const HeroSection = ({
 }: Props) => {
   return (
     <section>
-      <div className="py-4 px-4 mx-auto max-w-screen-md text-center">
+      <div className="py-4 px-4 mx-auto max-w-(--breakpoint-md) text-center">
         <div className="mb-4">
           <span className="text-xs bg-blue-600 rounded-full text-white px-4 py-1.5">
             {`The AI Revolution for Brokers`}

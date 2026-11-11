@@ -10,8 +10,8 @@ type Props = {
 
 const DefaultHeader = ({ apiKey, onApiKeyChange, remember, onRememberChange }: Props) => {
   return (
-    <nav className="bg-white border-gray-200 drop-shadow">
-      <div className="max-w-screen-xl flex flex-wrap gap-4 items-center justify-between mx-auto p-4">
+    <nav className="bg-white border-gray-200 drop-shadow-sm">
+      <div className="max-w-(--breakpoint-xl) flex flex-wrap gap-4 items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold text-gray-900">
             {`PropSpect`}

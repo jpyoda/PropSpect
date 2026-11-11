@@ -7,7 +7,7 @@ type Props = {
 const CardsSection = ({ inmuebles }: Props) => {
   return (
     <section>
-      <div className="px-4 mx-auto max-w-screen-md">
+      <div className="px-4 mx-auto max-w-(--breakpoint-md)">
         <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
           {inmuebles.map((v, i) => (
             <div

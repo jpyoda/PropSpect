@@ -44,7 +44,7 @@ const HomePage = () => {
       {status.kind === "loading" ? <LoadItems /> : null}
       {status.kind === "error" ? (
         <div
-          className="max-w-screen-md w-full px-4 mb-6"
+          className="max-w-(--breakpoint-md) w-full px-4 mb-6"
           role="alert"
         >
           <div className="p-4 text-sm text-red-800 rounded-lg bg-red-50">{status.message}</div>
