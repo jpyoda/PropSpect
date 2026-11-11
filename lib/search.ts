@@ -50,10 +50,24 @@ function toSearchError(err: unknown): SearchError {
   return new SearchError("Something went wrong. Please try again.");
 }
 
-export async function searchInmuebles(apiKey: string, query: string): Promise<Inmueble[]> {
+export type SearchStage = "understanding" | "fetching";
+
+export type SearchResult = {
+  filters: SearchFilters;
+  inmuebles: Inmueble[];
+};
+
+export async function searchInmuebles(
+  apiKey: string,
+  query: string,
+  onStage?: (stage: SearchStage) => void
+): Promise<SearchResult> {
   try {
+    onStage?.("understanding");
     const filters = await extractFilters(createClient(apiKey), query);
-    return await fetchInmuebles(filters);
+    onStage?.("fetching");
+    const inmuebles = await fetchInmuebles(filters);
+    return { filters, inmuebles };
   } catch (err) {
     throw toSearchError(err);
   }

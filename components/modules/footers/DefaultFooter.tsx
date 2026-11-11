@@ -5,33 +5,38 @@ const DefaultFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <section className="bg-slate-50 p-4">
-      <footer className="bg-white rounded-lg shadow-sm">
-        <div className="w-full mx-auto max-w-(--breakpoint-xl) p-4 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center">
-            © {currentYear}{" "}
-            <Link href="/" className="hover:underline">{`PropSpect.`}</Link>{" "}
-            {`All Rights Reserved.`}
-          </span>
-          <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0">
-            <li>
-              <Link
-                href="https://github.com/jpyoda/propspect/blob/main/LICENSE"
-                target="_blank"
-                className="hover:underline mx-2"
-              >{`Licensing`}</Link>
-            </li>
-            <li>
-              <Link
-                href="https://www.juanpgonzalez.com/"
-                target="_blank"
-                className="hover:underline mx-2"
-              >{`Contact`}</Link>
-            </li>
-          </ul>
-        </div>
-      </footer>
-    </section>
+    <footer className="border-t border-gray-200 bg-white">
+      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-col gap-3 px-4 py-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          © {currentYear}{" "}
+          <Link href="/" className="font-medium text-gray-700 hover:underline">{`PropSpect`}</Link>
+          {`. Data from `}
+          <a
+            href="https://www.datos.gov.co/"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:underline"
+          >{`Datos Abiertos Colombia`}</a>
+          {`.`}
+        </p>
+        <ul className="flex gap-4">
+          <li>
+            <Link
+              href="https://github.com/jpyoda/propspect/blob/main/LICENSE"
+              target="_blank"
+              className="hover:underline"
+            >{`Licensing`}</Link>
+          </li>
+          <li>
+            <Link
+              href="https://www.juanpgonzalez.com/"
+              target="_blank"
+              className="hover:underline"
+            >{`Contact`}</Link>
+          </li>
+        </ul>
+      </div>
+    </footer>
   );
 };
 

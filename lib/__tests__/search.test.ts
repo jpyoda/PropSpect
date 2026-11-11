@@ -52,9 +52,14 @@ describe("searchInmuebles", () => {
         : json([{ codigo: "1", ciudad: "BOGOTA", estrato: "SEIS" }])
     );
 
-    const rows = await searchInmuebles("sk-test", "apartamentos en bogota estrato 6");
+    const stages: string[] = [];
+    const result = await searchInmuebles("sk-test", "apartamentos en bogota estrato 6", (s) =>
+      stages.push(s)
+    );
 
-    expect(rows).toEqual([{ codigo: "1", ciudad: "BOGOTA", estrato: "SEIS" }]);
+    expect(result.inmuebles).toEqual([{ codigo: "1", ciudad: "BOGOTA", estrato: "SEIS" }]);
+    expect(result.filters).toEqual(filters);
+    expect(stages).toEqual(["understanding", "fetching"]);
     const datosCall = fetchMock.mock.calls
       .map(([input]) => String(input instanceof Request ? input.url : input))
       .find((u) => u.includes("datos.gov.co"));

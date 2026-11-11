@@ -1,12 +1,19 @@
 @import 'tailwindcss';
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@theme {
+  /* PropSpect brand: deep teal, with amber reserved for warnings. */
+  --color-brand-50: #effaf8;
+  --color-brand-100: #d5f2ec;
+  --color-brand-200: #abe4d9;
+  --color-brand-500: #14907f;
+  --color-brand-600: #0e7468;
+  --color-brand-700: #0d5d55;
+  --color-brand-800: #0e4a45;
+  --color-brand-900: #0b3a37;
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
+/*
+  Tailwind v4 defaults borders to `currentcolor`; keep the v3 gray default.
 */
 @layer base {
   *,
@@ -16,12 +23,4 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
-
-.c-capitalize {
-    text-transform: lowercase;
-}
-
-.c-capitalize::first-letter {
-    text-transform: capitalize;
 }
