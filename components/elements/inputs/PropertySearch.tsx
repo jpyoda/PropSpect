@@ -2,17 +2,17 @@ import React from "react";
 
 type Props = {
   searchTerm: string;
-  handleInputChange: any;
-  handleSearch: any;
+  onSearchTermChange: (value: string) => void;
+  onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 const PropertySearch = ({
   searchTerm,
-  handleInputChange,
-  handleSearch,
+  onSearchTermChange,
+  onSearch,
 }: Props) => {
   return (
-    <form onSubmit={handleSearch} className="flex items-center">
-      <label className="sr-only">{`Search`}</label>
+    <form onSubmit={onSearch} className="flex items-center">
+      <label htmlFor="property-search" className="sr-only">{`Search`}</label>
       <div className="relative w-full">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <svg
@@ -32,11 +32,11 @@ const PropertySearch = ({
         </div>
         <input
           type="text"
-          id="voice-search"
+          id="property-search"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
           placeholder="e.g., Apartamentos en Bogotá por barrio Chico que sean estrato seis."
           value={searchTerm}
-          onChange={handleInputChange}
+          onChange={(e) => onSearchTermChange(e.target.value)}
           required
         />
       </div>

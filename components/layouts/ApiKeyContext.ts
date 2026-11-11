@@ -2,6 +2,6 @@
 
 import React from "react";
 
-const ApiKeyContext = React.createContext<string | undefined>(undefined);
+const ApiKeyContext = React.createContext<string>("");
 
 export default ApiKeyContext;
