@@ -1,40 +1,26 @@
 import React from "react";
+import SearchIcon from "@/components/elements/icons/SearchIcon";
 
 type Props = {
   searchTerm: string;
   onSearchTermChange: (value: string) => void;
   onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
+  disabled?: boolean;
 };
-const PropertySearch = ({
-  searchTerm,
-  onSearchTermChange,
-  onSearch,
-}: Props) => {
+
+const PropertySearch = ({ searchTerm, onSearchTermChange, onSearch, disabled }: Props) => {
   return (
-    <form onSubmit={onSearch} className="flex items-center">
-      <label htmlFor="property-search" className="sr-only">{`Search`}</label>
+    <form onSubmit={onSearch} className="flex flex-col gap-2 sm:flex-row" role="search">
+      <label htmlFor="property-search" className="sr-only">{`Describe the property you want`}</label>
       <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4 text-gray-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
-            />
-          </svg>
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
+          <SearchIcon className="h-4 w-4" />
         </div>
         <input
           type="text"
           id="property-search"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-          placeholder="e.g., Apartamentos en Bogotá por barrio Chico que sean estrato seis."
+          className="block w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-3 text-base text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-brand-500 focus:outline-hidden focus:ring-4 focus:ring-brand-100"
+          placeholder="Apartamentos en Chicó estrato 6"
           value={searchTerm}
           onChange={(e) => onSearchTermChange(e.target.value)}
           required
@@ -42,23 +28,10 @@ const PropertySearch = ({
       </div>
       <button
         type="submit"
-        className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-hidden focus:ring-blue-300"
+        disabled={disabled}
+        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-base font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-hidden focus-visible:ring-4 focus-visible:ring-brand-200 disabled:cursor-wait disabled:opacity-70"
       >
-        <svg
-          className="w-4 h-4 mr-2"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
+        <SearchIcon className="h-4 w-4" />
         {`Search`}
       </button>
     </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DefaultFooter from "../modules/footers/DefaultFooter";
 import DefaultHeader from "../modules/headers/DefaultHeader";
 import ApiKeyContext from "./ApiKeyContext";
@@ -31,6 +31,7 @@ type Props = {
 const DefaultLayout = ({ children }: Props) => {
   const [apiKey, setApiKey] = useState("");
   const [remember, setRemember] = useState(false);
+  const [keyPanelOpen, setKeyPanelOpen] = useState(false);
 
   // Restore a key remembered for this tab. Reading sessionStorage must wait
   // until after hydration, so this runs once on mount.
@@ -53,17 +54,24 @@ const DefaultLayout = ({ children }: Props) => {
     writeStoredKey(value ? apiKey : null);
   };
 
+  const requestApiKey = useCallback(() => setKeyPanelOpen(true), []);
+  const contextValue = useMemo(() => ({ apiKey, requestApiKey }), [apiKey, requestApiKey]);
+
   return (
-    <>
+    <div className="flex min-h-screen flex-col bg-slate-50">
       <DefaultHeader
         apiKey={apiKey}
         onApiKeyChange={handleApiKeyChange}
         remember={remember}
         onRememberChange={handleRememberChange}
+        keyPanelOpen={keyPanelOpen}
+        onKeyPanelOpenChange={setKeyPanelOpen}
       />
-      <ApiKeyContext.Provider value={apiKey}>{children}</ApiKeyContext.Provider>
+      <ApiKeyContext.Provider value={contextValue}>
+        <div className="flex-1">{children}</div>
+      </ApiKeyContext.Provider>
       <DefaultFooter />
-    </>
+    </div>
   );
 };
 

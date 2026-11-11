@@ -1,55 +1,66 @@
 import PropertySearch from "@/components/elements/inputs/PropertySearch";
 import React from "react";
 
+export const SAMPLE_QUERIES = [
+  "Apartamentos en Bogotá estrato seis",
+  "Casas en Bogotá estrato 5",
+  "Lotes comerciales en el barrio Tintala",
+  "Barrio La Calera estrato rural",
+];
+
 type Props = {
   searchTerm: string;
-  apikeyAlert: boolean;
+  busy: boolean;
   onSearchTermChange: (value: string) => void;
   onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSampleQuery: (query: string) => void;
 };
-const HeroSection = ({
-  searchTerm,
-  apikeyAlert,
-  onSearchTermChange,
-  onSearch,
-}: Props) => {
+
+const HeroSection = ({ searchTerm, busy, onSearchTermChange, onSearch, onSampleQuery }: Props) => {
   return (
-    <section>
-      <div className="py-4 px-4 mx-auto max-w-(--breakpoint-md) text-center">
-        <div className="mb-4">
-          <span className="text-xs bg-blue-600 rounded-full text-white px-4 py-1.5">
-            {`The AI Revolution for Brokers`}
-          </span>
-        </div>
-        <h1 className="mb-5 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
-          {`Discover Properties in Seconds`}
+    <section className="relative isolate overflow-hidden border-b border-gray-200 bg-white">
+      {/* Soft brand glow and a faint street-grid pattern behind the heading. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_50%_0%,var(--color-brand-100),transparent_70%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 opacity-40 [background-image:linear-gradient(var(--color-gray-200)_1px,transparent_1px),linear-gradient(90deg,var(--color-gray-200)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]"
+      />
+      <div className="mx-auto max-w-(--breakpoint-md) px-4 pb-10 pt-10 text-center sm:pb-14 sm:pt-16">
+        <span className="inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-800 ring-1 ring-brand-200">
+          {`AI property search for brokers`}
+        </span>
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+          {`Discover properties in seconds`}
         </h1>
-        <p className="mb-12 text-lg font-normal text-gray-500 lg:text-xl px-12">
-          {`Ditch the Filters. Delve Directly into Prime Properties. Experience instant, AI-powered property discovery without the hassle.`}
+        <p className="mx-auto mt-3 max-w-xl text-base text-gray-600 sm:text-lg">
+          {`Describe what you need. We search Colombia's open property data for you.`}
         </p>
-        {apikeyAlert ? (
-          <div
-            className="p-4 mb-4 text-left text-sm text-yellow-800 rounded-lg bg-yellow-50"
-            role="alert"
-          >
-            <span className="font-medium">{`Please enter your OpenAI API key`}</span>
-            <span>{` in the field at the top of the page to search.`}</span>
-          </div>
-        ) : null}
-        <PropertySearch
-          searchTerm={searchTerm}
-          onSearchTermChange={onSearchTermChange}
-          onSearch={onSearch}
-        />
-        <div
-          className="w-full p-4 mb-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 text-left"
-          role="alert"
-        >
-          <span className="font-medium mb-2">{`📌 Sample Queries:`}</span>
-          <p>{`¿Dame apartamentos en Bogota estrato seis?`}</p>
-          <p>{`¿Dame casas en Bogota estrato 5?`}</p>
-          <p>{`¿Lotes comercial en el barrio Tintala?`}</p>
-          <p>{`¿Barrio La Calera estrato rural?`}</p>
+
+        <div className="mt-8 text-left">
+          <PropertySearch
+            searchTerm={searchTerm}
+            onSearchTermChange={onSearchTermChange}
+            onSearch={onSearch}
+            disabled={busy}
+          />
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+          <span className="text-sm text-gray-500">{`Try:`}</span>
+          {SAMPLE_QUERIES.map((q) => (
+            <button
+              key={q}
+              type="button"
+              disabled={busy}
+              onClick={() => onSampleQuery(q)}
+              className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-xs hover:border-brand-200 hover:bg-brand-50 hover:text-brand-800 focus:outline-hidden focus-visible:ring-4 focus-visible:ring-brand-100 disabled:opacity-60"
+            >
+              {q}
+            </button>
+          ))}
         </div>
       </div>
     </section>
