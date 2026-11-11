@@ -4,18 +4,18 @@ import React from "react";
 type Props = {
   searchTerm: string;
   apikeyAlert: boolean;
-  handleInputChange: any;
-  handleSearch: any;
+  onSearchTermChange: (value: string) => void;
+  onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 const HeroSection = ({
   searchTerm,
   apikeyAlert,
-  handleInputChange,
-  handleSearch,
+  onSearchTermChange,
+  onSearch,
 }: Props) => {
   return (
     <section>
-      <div className="py-4 px-4 mx-auto max-w-screen-md text-center">
+      <div className="py-4 px-4 mx-auto max-w-(--breakpoint-md) text-center">
         <div className="mb-4">
           <span className="text-xs bg-blue-600 rounded-full text-white px-4 py-1.5">
             {`The AI Revolution for Brokers`}
@@ -33,12 +33,13 @@ const HeroSection = ({
             role="alert"
           >
             <span className="font-medium">{`Please enter your OpenAI API key`}</span>
+            <span>{` in the field at the top of the page to search.`}</span>
           </div>
         ) : null}
         <PropertySearch
           searchTerm={searchTerm}
-          handleInputChange={handleInputChange}
-          handleSearch={handleSearch}
+          onSearchTermChange={onSearchTermChange}
+          onSearch={onSearch}
         />
         <div
           className="w-full p-4 mb-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 text-left"
